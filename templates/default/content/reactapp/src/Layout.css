@@ -1,0 +1,19 @@
+.Layout{
+    width:100vw;
+    height:100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:column;
+    padding-top: 300px;
+}
+.mybtn{
+    background-color: #999999;
+}
+.testbox{
+    width: 100px;
+    height: 100px;
+    background-color: #ff0000;
+    display: inline-block;
+    margin-left: 0px;
+}
