@@ -34,7 +34,9 @@ padding-left: 0 !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
 }
-
+.p-1 {
+    padding: 0.25rem !important;
+}
 
 .heimin{
     height: 250px;
