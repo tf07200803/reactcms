@@ -234,7 +234,7 @@ module.exports = function (webpackEnv) {
       minimize: isEnvProduction,
       minimizer: [
         // This is only used in production mode
-        new TerserPlugin({
+        /*new TerserPlugin({
           terserOptions: {
             parse: {
               // We want terser to parse ecma 8 code. However, we don't want it
@@ -292,7 +292,7 @@ module.exports = function (webpackEnv) {
           cssProcessorPluginOptions: {
             preset: ['default', { minifyFontValues: { removeQuotes: false } }],
           },
-        }),
+        }),*/
       ],
       // Automatically split vendor and commons
       // https://twitter.com/wSokra/status/969633336732905474
