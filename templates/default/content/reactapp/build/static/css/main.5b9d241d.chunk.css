@@ -63,14 +63,14 @@ padding-left: 0 !important;
 .specialtitle::before{
     content: "■";
     color:#df0000;
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin-right: 5px;
     position: relative;
     top: -3px;
 }
 
 .specialtitle{
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 .footerbg{
     padding-top: 30px;
@@ -176,6 +176,32 @@ a:hover .onelist .imgdetail{
     text-align: center;
     width: 100%;
 }
+.menubtn{
+    width: 30px;
+    height: 30px;
+
+}
+
+
+
+
+@media screen and (min-width: 768px) {
+    .specialtitle::before{
+        font-size: 1.5rem;
+    }
+
+    .specialtitle{
+        font-size: 2rem;
+    }
+}
+
+@media screen and (min-width: 992px) {
+
+}
+@media screen and (min-width: 1200px) {
+
+
+}
 
 .Layout{
     width:100vw;
@@ -198,4 +224,4 @@ a:hover .onelist .imgdetail{
 }
 
 
-/*# sourceMappingURL=main.a277eeae.chunk.css.map*/
+/*# sourceMappingURL=main.5b9d241d.chunk.css.map*/
