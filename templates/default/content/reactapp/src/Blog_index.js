@@ -1,6 +1,7 @@
 
 import React, {useEffect, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
+import empty from "./empty.jpg";
 
 import axios from 'axios';
 
@@ -53,18 +54,18 @@ const Blog_index=(props)=>{
                             <div className="col-12">
                             <div className="specialtitle">專題新聞</div>
                             </div>
-                        <div className="col-6 p-1">
+                        <div className="col-12 col-lg-6 p-1">
 
 
-                            {jsondata===null ? "": Object.entries(jsondata[0].data).map((t,k) => k==0 ? <Link key={t[0]} to={'/Blog_detail?id='+t[1].id}><div  key={t[0]} className="col heimax fullimg" style={{backgroundImage: `url(${jsondata===null ? "":t[1].thumb})`}} ><div className='txtbg'>{t[1].title}</div></div></Link>:'') }
+                            {jsondata===null ? "": Object.entries(jsondata[0].data).map((t,k) => k==0 ? <Link key={t[0]} to={'/Blog_detail?id='+t[1].id}><div  key={t[0]} className="col heimax fullimg" style={{backgroundImage: `url(${t[1].thumb=='' ? empty:t[1].thumb})`}} ><div className='txtbg'>{t[1].title}</div></div></Link>:'') }
 
 
                         </div>
-                        <div className="col-6">
+                        <div className="col-12 col-lg-6">
                                 <div className="row">
 
 
-                                {jsondata===null ? "": Object.entries(jsondata[0].data).map((t,k) => k>0&&k<5 ? <Link key={t[0]} to={'/Blog_detail?id='+t[1].id}><div key={t[0]} className="col-6 p-1 heimin"><div className="fulldiv fullimg" style={{backgroundImage: `url(${jsondata===null ? "":t[1].thumb})`}}><div className='txtbg'>{t[1].title}</div></div></div></Link>:'') }
+                                {jsondata===null ? "": Object.entries(jsondata[0].data).map((t,k) => k>0&&k<5 ? <Link key={t[0]} to={'/Blog_detail?id='+t[1].id}><div key={t[0]} className="col-6 p-1 heimin"><div className="fulldiv fullimg" style={{backgroundImage: `url(${t[1].thumb=='' ? empty:t[1].thumb})`}}><div className='txtbg'>{t[1].title}</div></div></div></Link>:'') }
 
 
                                 </div>
@@ -79,18 +80,18 @@ const Blog_index=(props)=>{
 
                     <div className="row mt-4 mb-4">
 
-                        <div className="col-8">
+                        <div className="col-12 col-lg-8">
                         <div className="row">
                             <div className="col-12">
                                 <div className="specialtitle">熱門新聞</div>
                             </div>
 
-    {jsondata===null ? "": Object.entries(jsondata[1].data).map((t,k) => <Link key={t[0]} to={'/Blog_detail?id='+t[1].id}><div key={t[0]} className="col-4 p-1 heimin"><div className="fulldiv fullimg" style={{backgroundImage: `url(${jsondata===null ? "":t[1].thumb})`}}><div className='txtbg'>{t[1].title}</div></div></div></Link>) }
+    {jsondata===null ? "": Object.entries(jsondata[1].data).map((t,k) => <Link key={t[0]} to={'/Blog_detail?id='+t[1].id}><div key={t[0]} className="col-4 p-1 heimin"><div className="fulldiv fullimg" style={{backgroundImage: `url(${t[1].thumb=='' ? empty:t[1].thumb})`}}><div className='txtbg'>{t[1].title}</div></div></div></Link>) }
 
                         </div>
                         </div>
 
-                        <div className="col-4">
+                        <div className="col-12 col-lg-4">
 
 
                             <div className="col-12">

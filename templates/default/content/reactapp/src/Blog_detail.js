@@ -71,18 +71,18 @@ const Blog_detail=(props)=>{
         <div className='row mt-4 mb-4'>
 
 
-<div className="col-8">
+<div className="col-12 col-lg-8">
 
         <div className="contentnews row">
 
-        <div className="col-12 pagetitle">{jsondata===null ? '':jsondata.title}</div>
+        <div className="col-12 pagetitle">{jsondata==null ? '':jsondata.title}</div>
 
-        <div className="col-12" dangerouslySetInnerHTML={jsondata===null ? createMarkup(''): createMarkup(jsondata.content)}></div>
+        <div className="col-12" dangerouslySetInnerHTML={jsondata==null ? createMarkup(''): createMarkup(jsondata.content)}></div>
 
         <div className="col-12">
 
-        <div className={jsondata!=null && jsondata.prev.title=='empty'  ? 'pagebtn float-right col-4 d-none': 'pagebtn float-right col-4'} onClick={(e) => pagelink(jsondata===null ? '': jsondata.prev.id, e)}>{jsondata===null ? '': jsondata.prev.title}</div>
-        <div className={jsondata!=null && jsondata.next.title=='empty'  ? 'pagebtn float-left col-4 d-none': 'pagebtn float-left col-4'} onClick={(e) => pagelink(jsondata===null ? '': jsondata.next.id, e)}>{jsondata===null ? '': jsondata.next.title}</div>
+        <div className={jsondata!=null && jsondata.prev.title=='empty'  ? 'pagebtn float-right col-4 d-none': 'pagebtn float-right col-4'} onClick={(e) => pagelink(jsondata==null ? '': jsondata.prev.id, e)}>{jsondata==null ? '': jsondata.prev.title}</div>
+        <div className={jsondata!=null && jsondata.next.title=='empty'  ? 'pagebtn float-left col-4 d-none': 'pagebtn float-left col-4'} onClick={(e) => pagelink(jsondata==null ? '': jsondata.next.id, e)}>{jsondata==null ? '': jsondata.next.title}</div>
 
         </div>
 
@@ -93,7 +93,7 @@ const Blog_detail=(props)=>{
 
         </div>
 
-        <div className="col-4 rightbar"><div><img src={banner1} /></div><div><img src={banner2} /></div><div><img src={banner3} /></div></div>
+        <div className="col-4 rightbar d-none d-lg-block"><div><img src={banner1} /></div><div><img src={banner2} /></div><div><img src={banner3} /></div></div>
 
 
 

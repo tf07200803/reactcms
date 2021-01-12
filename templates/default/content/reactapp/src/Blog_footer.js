@@ -21,13 +21,9 @@ const Blog_footer=(props)=>{
         <div className="col-12">
 
 
-        <div className="row justify-content-end footerright">
+        <div className="row justify-content-center footerright">
 
-        <a className="ml-3 mr-3">ĐẠI LÝ</a>
-    <a className="ml-3 mr-3">LIÊN HỆ</a>
-    <a className="ml-3 mr-3">TRUNG TÂM THÔNG TIN</a>
-    <a className="ml-3 mr-3">ĐIỀU KIỆN &amp; ĐIỀU KHOẢN</a>
-    <a className="ml-3 mr-3">VỀ CHÚNG TÔI</a>
+        @2020 Trang web giải trí bản quyền giấy phép được chứng nhận của PAGCOR Philippines
 
 
     </div>

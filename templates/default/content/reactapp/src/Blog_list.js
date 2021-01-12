@@ -6,6 +6,7 @@ import axios from "axios";
 import {useHistory} from 'react-router-dom';
 import $ from "jquery";
 import {Link} from "react-router-dom";
+import empty from "./empty.jpg";
 
 const Blog_detail=(props)=>{
 
@@ -103,7 +104,7 @@ const Blog_detail=(props)=>{
         <div className="col-12">
         <div className="specialtitle">{catid==9 ? '專題新聞':''}{catid==10 ? '熱門新聞':''}{catid==6 ? '國外新聞':''}</div>
         </div>
-        <div className="col-8">
+        <div className="col-12 col-lg-8">
 
         <div className="contentnews row">
 
@@ -113,14 +114,14 @@ const Blog_detail=(props)=>{
 
                 <div className="row">
 
-                    <div className="col-3">
+                    <div className="col-12 col-lg-3">
 
-                        <div className="oneimg fullimg" style={{backgroundImage: `url(${jsondata===null ? "":t[1].thumb})`}}></div>
+                        <div className="oneimg fullimg" style={{backgroundImage: `url(${t[1].thumb=='' ? empty:t[1].thumb})`}}></div>
 
                     </div>
 
 
-                    <div className="col-9">
+                    <div className="col-12 col-lg-9">
 
                         <div className="row">
 
@@ -156,7 +157,7 @@ const Blog_detail=(props)=>{
 
         </div>
 
-        <div className="col-4 rightbar"><div><img src={banner1} /></div><div><img src={banner2} /></div><div><img src={banner3} /></div></div>
+        <div className="col-4 rightbar d-none d-lg-block"><div><img src={banner1} /></div><div><img src={banner2} /></div><div><img src={banner3} /></div></div>
 
 
 

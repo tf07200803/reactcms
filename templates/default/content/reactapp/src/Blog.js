@@ -2,6 +2,7 @@
 import {HashRouter,Route,Switch} from "react-router-dom";
 import './blog.css';
 
+
 import Blog_menu from "./Blog_menu";
 import Blog_index from "./Blog_index";
 import Blog_detail from "./Blog_detail";
