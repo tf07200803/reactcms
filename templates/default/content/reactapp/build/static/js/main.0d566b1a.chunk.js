@@ -21,7 +21,7 @@ var jsx_runtime = __webpack_require__(1);
 var react = __webpack_require__(0);
 
 // EXTERNAL MODULE: ./node_modules/react-dom/index.js
-var react_dom = __webpack_require__(8);
+var react_dom = __webpack_require__(9);
 var react_dom_default = /*#__PURE__*/__webpack_require__.n(react_dom);
 
 // EXTERNAL MODULE: ./src/blog.css
@@ -31,7 +31,7 @@ var blog = __webpack_require__(55);
 var slicedToArray = __webpack_require__(13);
 
 // EXTERNAL MODULE: ./node_modules/react-router-dom/esm/react-router-dom.js
-var react_router_dom = __webpack_require__(11);
+var react_router_dom = __webpack_require__(8);
 
 // EXTERNAL MODULE: ./node_modules/react-router/esm/react-router.js
 var react_router = __webpack_require__(7);
@@ -40,7 +40,7 @@ var react_router = __webpack_require__(7);
 var objectSpread2 = __webpack_require__(69);
 
 // EXTERNAL MODULE: ./node_modules/axios/index.js
-var axios = __webpack_require__(23);
+var axios = __webpack_require__(21);
 var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 
 // EXTERNAL MODULE: ./node_modules/@fortawesome/react-fontawesome/index.es.js
@@ -100,7 +100,7 @@ console.log(jsondata);console.log('觸發內容更動function');}},[props,jsonda
 // CONCATENATED MODULE: ./src/try3.png
 /* harmony default export */ var try3 = (__webpack_require__.p + "static/media/try3.b04b1a0f.png");
 // EXTERNAL MODULE: ./node_modules/jquery/dist/jquery.js
-var jquery = __webpack_require__(43);
+var jquery = __webpack_require__(33);
 var jquery_default = /*#__PURE__*/__webpack_require__.n(jquery);
 
 // CONCATENATED MODULE: ./src/Blog_detail.js
@@ -114,6 +114,10 @@ var Blog_list_this=undefined;var Blog_list_Blog_detail=function Blog_detail(prop
 mounted.current=true;idchange(url.id);pageidchange(url.page);//getapi();
 }else{//componentDidUpdate
 var url=checkurl(window.location.href);idchange(url.id);pageidchange(url.page);console.log('觸發內容更動function');if(catid!=_catid||pageid!=_pageid){console.log("catid有變動");_idchange(url.id);_pageidchange(url.page);getapi();}}},[props,jsondata,catid,pageid]);return/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{children:/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"center1200",children:/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"container",children:/*#__PURE__*/Object(jsx_runtime["jsxs"])("div",{className:"row mt-4 mb-4",children:[/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"col-12",children:/*#__PURE__*/Object(jsx_runtime["jsxs"])("div",{className:"specialtitle",children:[catid==9?'專題新聞':'',catid==10?'熱門新聞':'',catid==6?'國外新聞':'']})}),/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"col-12 col-lg-8",children:/*#__PURE__*/Object(jsx_runtime["jsxs"])("div",{className:"contentnews row",children:[jsondata===null?"":Object.entries(jsondata.data).map(function(t,k){return/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router_dom["b" /* Link */],{to:'/Blog_detail?id='+t[1].id,children:/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"col-12 onelist",children:/*#__PURE__*/Object(jsx_runtime["jsxs"])("div",{className:"row",children:[/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"col-12 col-lg-3",children:/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"oneimg fullimg",style:{backgroundImage:"url(".concat(t[1].thumb==''?empty:t[1].thumb,")")}})}),/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"col-12 col-lg-9",children:/*#__PURE__*/Object(jsx_runtime["jsxs"])("div",{className:"row",children:[/*#__PURE__*/Object(jsx_runtime["jsxs"])("div",{className:"col-12 p-2",children:[/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"imgtitle",children:t[1].title}),/*#__PURE__*/Object(jsx_runtime["jsxs"])("div",{className:"imgdetail",children:[t[1].description,"..."]})]}),/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"imgmore",children:"\u8A73\u5168\u6587"})]})})]})})},t[0]);}),/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"pages",dangerouslySetInnerHTML:jsondata===null?createMarkup(''):createMarkup(jsondata.pages)})]})}),/*#__PURE__*/Object(jsx_runtime["jsxs"])("div",{className:"col-4 rightbar d-none d-lg-block",children:[/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{children:/*#__PURE__*/Object(jsx_runtime["jsx"])("img",{src:src_try})}),/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{children:/*#__PURE__*/Object(jsx_runtime["jsx"])("img",{src:try2})}),/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{children:/*#__PURE__*/Object(jsx_runtime["jsx"])("img",{src:try3})})]})]})})})});};/* harmony default export */ var Blog_list = (Blog_list_Blog_detail);
+// CONCATENATED MODULE: ./src/Blog_race.js
+var Blog_race_this=undefined;var Blog_race_Blog_race=function Blog_race(props){var mounted=Object(react["useRef"])();Object(react["useEffect"])(function(){var self=Blog_race_this;if(!mounted.current){//componentDidMount
+mounted.current=true;}else{//componentDidUpdate
+console.log('觸發內容更動function');}},[props]);return/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{children:/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"center1200",children:/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{className:"container",children:"\u8CFD\u4E8B\u8A55\u4F30"})})});};/* harmony default export */ var src_Blog_race = (Blog_race_Blog_race);
 // EXTERNAL MODULE: ./src/Layout.css
 var Layout = __webpack_require__(108);
 
@@ -124,7 +128,7 @@ console.log('state植被換掉');}},[props,num]);return/*#__PURE__*/Object(jsx_r
 // CONCATENATED MODULE: ./src/SecondPage.js
 var SecondPage_SecondPage=function SecondPage(props){var StyleSheet={width:"100vw",height:"100vh",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column"};console.log(props);console.log(props.match.params);return/*#__PURE__*/Object(jsx_runtime["jsx"])("div",{style:StyleSheet,children:/*#__PURE__*/Object(jsx_runtime["jsx"])("h1",{style:{color:"#000",fontFamily:"Microsoft JhengHei"},children:"\u6211\u662F\u7B2C\u4E8C\u9801"})});};/* harmony default export */ var src_SecondPage = (SecondPage_SecondPage);
 // CONCATENATED MODULE: ./src/Blog.js
-var Blog_Blog=function Blog(){var _useState=Object(react["useState"])(0),_useState2=Object(slicedToArray["a" /* default */])(_useState,2),pageid=_useState2[0],changeid=_useState2[1];return/*#__PURE__*/Object(jsx_runtime["jsxs"])("div",{children:[/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router_dom["a" /* HashRouter */],{children:/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router["c" /* Switch */],{children:/*#__PURE__*/Object(jsx_runtime["jsxs"])(src_Blog_menu,{children:[/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router["a" /* Route */],{exact:true,path:"/",render:function render(){return/*#__PURE__*/Object(jsx_runtime["jsx"])(src_Blog_index,{});}}),/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router["a" /* Route */],{path:"/Blog_detail",component:src_Blog_detail}),/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router["a" /* Route */],{path:"/Blog_list",component:Blog_list})]})})}),/*#__PURE__*/Object(jsx_runtime["jsx"])(src_Blog_footer,{})]});};/* harmony default export */ var src_Blog = (Blog_Blog);
+var Blog_Blog=function Blog(){var _useState=Object(react["useState"])(0),_useState2=Object(slicedToArray["a" /* default */])(_useState,2),pageid=_useState2[0],changeid=_useState2[1];return/*#__PURE__*/Object(jsx_runtime["jsxs"])("div",{children:[/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router_dom["a" /* HashRouter */],{children:/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router["c" /* Switch */],{children:/*#__PURE__*/Object(jsx_runtime["jsxs"])(src_Blog_menu,{children:[/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router["a" /* Route */],{exact:true,path:"/",render:function render(){return/*#__PURE__*/Object(jsx_runtime["jsx"])(src_Blog_index,{});}}),/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router["a" /* Route */],{path:"/Blog_detail",component:src_Blog_detail}),/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router["a" /* Route */],{path:"/Blog_list",component:Blog_list}),/*#__PURE__*/Object(jsx_runtime["jsx"])(react_router["a" /* Route */],{path:"/Blog_race",component:src_Blog_race})]})})}),/*#__PURE__*/Object(jsx_runtime["jsx"])(src_Blog_footer,{})]});};/* harmony default export */ var src_Blog = (Blog_Blog);
 // CONCATENATED MODULE: ./src/reportWebVitals.js
 var reportWebVitals=function reportWebVitals(onPerfEntry){if(onPerfEntry&&onPerfEntry instanceof Function){__webpack_require__.e(/* import() */ 3).then(__webpack_require__.bind(null, 153)).then(function(_ref){var getCLS=_ref.getCLS,getFID=_ref.getFID,getFCP=_ref.getFCP,getLCP=_ref.getLCP,getTTFB=_ref.getTTFB;getCLS(onPerfEntry);getFID(onPerfEntry);getFCP(onPerfEntry);getLCP(onPerfEntry);getTTFB(onPerfEntry);});}};/* harmony default export */ var src_reportWebVitals = (reportWebVitals);
 // EXTERNAL MODULE: ./node_modules/bootstrap/dist/css/bootstrap.css
@@ -148,4 +152,4 @@ src_reportWebVitals();
 /***/ })
 
 },[[110,1,2]]]);
-//# sourceMappingURL=main.00b0d1ea.chunk.js.map
+//# sourceMappingURL=main.0d566b1a.chunk.js.map
