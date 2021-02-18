@@ -57,7 +57,7 @@ const Blog_index=(props)=>{
                         <div className="col-12 col-lg-6 p-1">
 
 
-                            {jsondata===null ? "": Object.entries(jsondata[0].data).map((t,k) => k==0 ? <Link key={t[0]} to={'/Blog_detail?id='+t[1].id}><div  key={t[0]} className="col heimax fullimg" style={{backgroundImage: `url(${t[1].thumb=='' ? empty:t[1].thumb})`}} ><div className='txtbg'>{t[1].title}</div></div></Link>:'') }
+                            {jsondata===null ? "": Object.entries(jsondata[0].data).map((t,k) => k==0 ? <Link key={t[0]} to={'/Blog_detail?id='+t[1].id+'&catid='+t[1].catid}><div  key={t[0]} className="col heimax fullimg" style={{backgroundImage: `url(${t[1].thumb=='' ? empty:t[1].thumb})`}} ><div className='txtbg'>{t[1].title}</div></div></Link>:'') }
 
 
                         </div>
@@ -65,7 +65,7 @@ const Blog_index=(props)=>{
                                 <div className="row">
 
 
-                                {jsondata===null ? "": Object.entries(jsondata[0].data).map((t,k) => k>0&&k<5 ? <Link key={t[0]} to={'/Blog_detail?id='+t[1].id}><div key={t[0]} className="col-6 p-1 heimin"><div className="fulldiv fullimg" style={{backgroundImage: `url(${t[1].thumb=='' ? empty:t[1].thumb})`}}><div className='txtbg'>{t[1].title}</div></div></div></Link>:'') }
+                                {jsondata===null ? "": Object.entries(jsondata[0].data).map((t,k) => k>0&&k<5 ? <Link key={t[0]} to={'/Blog_detail?id='+t[1].id+'&catid='+t[1].catid}><div key={t[0]} className="col-6 p-1 heimin"><div className="fulldiv fullimg" style={{backgroundImage: `url(${t[1].thumb=='' ? empty:t[1].thumb})`}}><div className='txtbg'>{t[1].title}</div></div></div></Link>:'') }
 
 
                                 </div>
@@ -86,7 +86,7 @@ const Blog_index=(props)=>{
                                 <div className="specialtitle">熱門新聞</div>
                             </div>
 
-    {jsondata===null ? "": Object.entries(jsondata[1].data).map((t,k) => <Link key={t[0]} to={'/Blog_detail?id='+t[1].id}><div key={t[0]} className="col-4 p-1 heimin"><div className="fulldiv fullimg" style={{backgroundImage: `url(${t[1].thumb=='' ? empty:t[1].thumb})`}}><div className='txtbg'>{t[1].title}</div></div></div></Link>) }
+    {jsondata===null ? "": Object.entries(jsondata[1].data).map((t,k) => <Link key={t[0]} to={'/Blog_detail?id='+t[1].id+'&catid='+t[1].catid}><div key={t[0]} className="col-4 p-1 heimin"><div className="fulldiv fullimg" style={{backgroundImage: `url(${t[1].thumb=='' ? empty:t[1].thumb})`}}><div className='txtbg'>{t[1].title}</div></div></div></Link>) }
 
                         </div>
                         </div>
@@ -105,7 +105,7 @@ const Blog_index=(props)=>{
 
 
 
-        {jsondata===null ? "": Object.entries(jsondata[3].data).map((t,k) => <Link key={t[0]} to={'/Blog_detail?id='+t[1].id}><li key={t[0]}>{t[1].title}</li></Link>)}
+        {jsondata===null ? "": Object.entries(jsondata[3].data).map((t,k) => <Link key={t[0]} to={'/Blog_detail?id='+t[1].id+'&catid='+t[1].catid}><li key={t[0]}>{t[1].title}</li></Link>)}
 
         </ul>
 

@@ -9,6 +9,8 @@ import Blog_detail from "./Blog_detail";
 import Blog_footer from "./Blog_footer";
 import Blog_list from "./Blog_list";
 import Blog_race from "./Blog_race";
+import Blog_login from "./Blog_login";
+import Blog_reg from "./Blog_reg";
 import FirstPage from "./FirstPage";
 import SecondPage from "./SecondPage";
 import {useState} from "react";
@@ -35,7 +37,8 @@ const Blog=()=>{
     <Route path="/Blog_detail" component={Blog_detail}/>
     <Route path="/Blog_list" component={Blog_list}/>
     <Route path="/Blog_race" component={Blog_race}/>
-
+    <Route path="/Blog_login" component={Blog_login}/>
+    <Route path="/Blog_reg" component={Blog_reg}/>
 
 
         </Blog_menu>

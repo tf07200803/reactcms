@@ -40,6 +40,7 @@ const Blog_menu=(props)=>{
 
     const mounted=useRef();
     const testpath='index.php?m=link&c=index&a=menu'
+    const logoutpath='index.php?m=member&c=index&a=logout&webtype=vue'
     const [jsondata,datachange]=useState(null);
 
     const classes = useStyles();
@@ -60,6 +61,28 @@ const Blog_menu=(props)=>{
         history.push(url);
         setOpen(false);
 
+    }
+    const login= () =>{
+        history.push("/Blog_login");
+    }
+    const loginout= () =>{
+
+        axios.get(logoutpath, {
+        }).then(function (response) {
+            var res=response.data;
+            if(res.status==-1){
+                alert(res.msg)
+            }else if(res.status==1){
+                alert(res.msg)
+                window.location.href="./"
+            }
+
+        }).catch(function (err) {
+            console.log(err);
+        });
+    }
+    const reg=()=>{
+        history.push("/Blog_reg");
     }
 
     useEffect(()=>{
@@ -109,6 +132,15 @@ const Blog_menu=(props)=>{
 
         </List>
         </Dialog>
+
+
+        <div className="loginheader">
+            <div className="container pt-3 pb-3">
+                <div className="loginbtn row justify-content-end"><div onClick={() => login()}>登入</div><div onClick={() => reg()}>/註冊</div><div onClick={() => loginout()}>登出</div></div>
+
+            </div>
+
+        </div>
 
 
 

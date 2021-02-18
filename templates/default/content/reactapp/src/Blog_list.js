@@ -110,7 +110,7 @@ const Blog_detail=(props)=>{
 
     {jsondata===null ? "": Object.entries(jsondata.data).map((t,k) =>
 
-        <Link key={t[0]} to={'/Blog_detail?id='+t[1].id}><div className="col-12 onelist" >
+        <Link key={t[0]} to={'/Blog_detail?id='+t[1].id+'&catid='+t[1].catid}><div className="col-12 onelist" >
 
                 <div className="row">
 

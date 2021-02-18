@@ -9,18 +9,36 @@ import {Link} from "react-router-dom";
 
 const Blog_detail=(props)=>{
 
+    const getUrlParam=(string)=>{
+        var obj = new Object();
+        if (string.indexOf("?") != -1) {
+            var string = string.substr(string.indexOf("?") + 1);
+            var strs = string.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                var tempArr = strs[i].split("=");
+                obj[tempArr[0]] = tempArr[1];
+            }
+        }
+        return obj;
+    }
+
+    var data = getUrlParam(window.location.href);
+
 
     const mounted=useRef();
     const [jsondata,datachange]=useState(null);
-    const [pageid,idchange]=useState(props.location.search.replace('?id=',''))
-    const [_pageid,_idchange]=useState(props.location.search.replace('?id=',''))
+    const [pageid,idchange]=useState(data.id)
+    const [_pageid,_idchange]=useState(data.id)
     const history = useHistory();
+
+
+
 
     const createMarkup=(str)=>{
         return {__html: str};
     }
-    const pagelink=(id)=>{
-        history.push("/Blog_detail?id="+id);
+    const pagelink=(id,catid)=>{
+        history.push("/Blog_detail?id="+id+'&catid='+catid);
 
     }
     const getapi=()=>{
@@ -35,6 +53,17 @@ const Blog_detail=(props)=>{
             console.log(err);
         });
     }
+    const messagepost=()=>{
+        var self=this
+        var data = {"title":'',"url":"","content":""};
+        axios.post('index.php?m=comment&c=index&a=post&commentid=content_'+data.catid+'-'+data.id+'-1', data,{
+        }).then(function (response) {
+            console.log(response)
+
+        }).catch(function (err) {
+            console.log(err);
+        });
+    }
     useEffect(()=>{
         var self=this;
         if(!mounted.current){ //componentDidMount
@@ -45,10 +74,11 @@ const Blog_detail=(props)=>{
         }
         else{ //componentDidUpdate
             console.log('觸發內容更動function')
-            idchange(props.location.search.replace('?id=',''))
+            data=getUrlParam(window.location.href);
+            idchange(data.id)
             if(pageid!=_pageid){
                 console.log("pageid有變動");
-                _idchange(props.location.search.replace('?id=',''))
+                _idchange(data.id)
                 getapi();
             }
         }
@@ -81,8 +111,23 @@ const Blog_detail=(props)=>{
 
         <div className="col-12">
 
-        <div className={jsondata!=null && jsondata.prev.title=='empty'  ? 'pagebtn float-right col-4 d-none': 'pagebtn float-right col-4'} onClick={(e) => pagelink(jsondata==null ? '': jsondata.prev.id, e)}>{jsondata==null ? '': jsondata.prev.title}</div>
-        <div className={jsondata!=null && jsondata.next.title=='empty'  ? 'pagebtn float-left col-4 d-none': 'pagebtn float-left col-4'} onClick={(e) => pagelink(jsondata==null ? '': jsondata.next.id, e)}>{jsondata==null ? '': jsondata.next.title}</div>
+        <div className={jsondata!=null && jsondata.prev.title=='empty'  ? 'pagebtn float-right col-4 d-none': 'pagebtn float-right col-4'} onClick={() => pagelink(jsondata==null ? '': jsondata.prev.id,jsondata.prev.catid)}>{jsondata==null ? '': jsondata.prev.title}</div>
+        <div className={jsondata!=null && jsondata.next.title=='empty'  ? 'pagebtn float-left col-4 d-none': 'pagebtn float-left col-4'} onClick={() => pagelink(jsondata==null ? '': jsondata.next.id,jsondata.next.catid)}>{jsondata==null ? '': jsondata.next.title}</div>
+
+        </div>
+
+
+        <div className="col-12">
+
+
+            <div>我要留言</div>
+            <div>
+        <textarea style={{width:"100%"}}>
+
+    </textarea>
+    <input type="submit" value="送出留言" onClick={() => messagepost()}/>
+            </div>
+
 
         </div>
 
