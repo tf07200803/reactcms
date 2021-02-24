@@ -47,7 +47,7 @@ const Blog_reg=(props)=>{
                     alert(res.msg)
                     window.location.href="./"
                 }
-                
+
             })
             .catch(function (response) {
                 //handle error
@@ -105,7 +105,7 @@ const Blog_reg=(props)=>{
 
 
 
-        <div className="col-12 p-1">
+        <div className="col-12 col-lg-6 p-1">
 
         <div className="row">
         <div className="col-12">密码：</div>
@@ -116,7 +116,7 @@ const Blog_reg=(props)=>{
 
 
 
-        <div className="col-12 p-1">
+        <div className="col-12 col-lg-6 p-1">
 
         <div className="row">
         <div className="col-12">确认密码：</div>

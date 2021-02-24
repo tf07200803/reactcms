@@ -677,6 +677,9 @@ class index extends foreground {
 	}
 
 	public function login() {
+
+
+        $type=isset($_POST['webtype']) ? true : false;
 		$this->_session_start();
 		//获取用户siteid
 		$siteid = isset($_REQUEST['siteid']) && trim($_REQUEST['siteid']) ? intval($_REQUEST['siteid']) : 1;
@@ -688,17 +691,17 @@ class index extends foreground {
 		if(isset($_POST['dosubmit'])) {
 			if(empty($_SESSION['connectid'])) {
 				//判断验证码
-				$code = isset($_POST['code']) && trim($_POST['code']) ? trim($_POST['code']) : showmessage(L('input_code'), HTTP_REFERER);
+				/*$code = isset($_POST['code']) && trim($_POST['code']) ? trim($_POST['code']) : showmessage(L('input_code'), HTTP_REFERER);
 				if ($_SESSION['code'] != strtolower($code)) {
 					$_SESSION['code'] = '';
 					showmessage(L('code_error'), HTTP_REFERER);
 				}
-				$_SESSION['code'] = '';
+				$_SESSION['code'] = '';*/
 			}
 
-			$username = isset($_POST['username']) && is_username($_POST['username']) ? trim($_POST['username']) : showmessage(L('username_empty'), HTTP_REFERER);
-			$password = isset($_POST['password']) && trim($_POST['password']) ? trim($_POST['password']) : showmessage(L('password_empty'), HTTP_REFERER);
-			is_password($_POST['password']) && is_badword($_POST['password'])==false ? trim($_POST['password']) : showmessage(L('password_format_incorrect'), HTTP_REFERER);
+			$username = isset($_POST['username']) && is_username($_POST['username']) ? trim($_POST['username']) : alert::message(-1,L('username_empty'));
+			$password = isset($_POST['password']) && trim($_POST['password']) ? trim($_POST['password']) : alert::message(-1,L('password_empty'));
+			is_password($_POST['password']) && is_badword($_POST['password'])==false ? trim($_POST['password']) : alert::message(-1,L('password_format_incorrect'));
 			$cookietime = intval($_POST['cookietime']);
 			$synloginstr = ''; //同步登陆js代码
 
@@ -743,11 +746,14 @@ class index extends foreground {
 					$synloginstr = $this->client->ps_member_synlogin($r['phpssouid']);
  				} else {
 					if($status == -1) {	//用户不存在
-						showmessage(L('user_not_exist'), 'index.php?m=member&c=index&a=login');
+						//showmessage(L('user_not_exist'), 'index.php?m=member&c=index&a=login');
+                        alert::message(-1,L('user_not_exist'));
 					} elseif($status == -2) { //密码错误
-						showmessage(L('password_error'), 'index.php?m=member&c=index&a=login');
+						//showmessage(L('password_error'), 'index.php?m=member&c=index&a=login');
+                        alert::message(-1,L('password_error'));
 					} else {
-						showmessage(L('login_failure'), 'index.php?m=member&c=index&a=login');
+						//showmessage(L('login_failure'), 'index.php?m=member&c=index&a=login');
+                        alert::message(-1,L('login_failure'));
 					}
 				}
 
@@ -763,7 +769,7 @@ class index extends foreground {
 				//查询帐号
 				$r = $this->db->get_one(array('username'=>$username));
 
-				if(!$r) showmessage(L('user_not_exist'),'index.php?m=member&c=index&a=login');
+				if(!$r) alert::message(-1,L('user_not_exist'));
 
 				//验证用户密码
 				$password = md5(md5(trim($password)).$r['encrypt']);
@@ -835,7 +841,8 @@ class index extends foreground {
 			param::set_cookie('_nickname', $nickname, $cookietime);
 			//param::set_cookie('cookietime', $_cookietime, $cookietime);
 			$forward = isset($_POST['forward']) && !empty($_POST['forward']) ? urldecode($_POST['forward']) : 'index.php?m=member&c=index';
-			showmessage(L('login_success').$synloginstr, $forward);
+			//showmessage(L('login_success').$synloginstr, $forward);
+            alert::message(1,L('login_success'));
 		} else {
 			$setting = pc_base::load_config('system');
 			$forward = isset($_GET['forward']) && trim($_GET['forward']) ? urlencode($_GET['forward']) : '';

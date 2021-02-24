@@ -1,5 +1,6 @@
 <?php
-defined('IN_PHPCMS') or exit('No permission resources.'); 
+defined('IN_PHPCMS') or exit('No permission resources.');
+pc_base::load_sys_class('alert');
 class index {
 	protected  $commentid, $modules, $siteid, $format;
 	function __construct() {
@@ -12,10 +13,10 @@ class index {
 		define('SITEID', $this->siteid);
 		$this->callback = isset($_GET['callback']) ? safe_replace($_GET['callback']) : '';
 	}
-	
+
 	public function init() {
 		$hot = isset($_GET['hot']) && intval($_GET['hot']) ? intval($_GET['hot']) : 0;
-		
+
 		pc_base::load_sys_class('form');
 		$commentid =& $this->commentid;
 		$modules =& $this->modules;
@@ -23,12 +24,12 @@ class index {
 		$siteid =& $this->siteid;
 		$username = param::get_cookie('_username',L('phpcms_friends'));
 		$userid = param::get_cookie('_userid');
-		
+
 		$comment_setting_db = pc_base::load_model('comment_setting_model');
 		$setting = $comment_setting_db->get_one(array('siteid'=>$this->siteid));
 		//SEO
 		$SEO = seo($siteid, '', $title);
-		
+
 		//通过API接口调用数据的标题、URL地址
 		if (!$data = get_comment_api($commentid)) {
 			$this->_show_msg(L('illegal_parameters'));
@@ -39,8 +40,8 @@ class index {
 				showmessage(L('canot_allow_comment'));
 			}
 			unset($data);
-		} 		
-		
+		}
+
 		if (isset($_GET['iframe'])) {
 			if (strpos($url,APP_PATH) === 0) {
 				$domain = APP_PATH;
@@ -53,7 +54,19 @@ class index {
 			include template('comment', 'list');
 		}
 	}
-	
+
+	public function getmessage(){
+        $commentid =& $this->commentid;
+        $pc_tag = pc_base::load_app_class('comment_tag');
+        $comment['data'] = $pc_tag->lists_r(array('commentid'=>$commentid,'siteid'=>$this->siteid,'limit'=>10));
+        alert::message(1,'',$comment['data']);
+
+
+
+
+
+    }
+
 	public function post() {
 		$comment = pc_base::load_app_class('comment');
 		$id = isset($_GET['id']) && intval($_GET['id']) ? intval($_GET['id']) : '';
@@ -66,7 +79,8 @@ class index {
 			//是否允许游客
 			if (!$setting['guest']) {
 				if (!$username || !$userid) {
-					$this->_show_msg(L('landing_users_to_comment'), HTTP_REFERER);
+					//$this->_show_msg(L('landing_users_to_comment'), HTTP_REFERER);
+                    alert::message(-1,L('landing_users_to_comment'));
 				}
 			}
 			if ($setting['code']) {
@@ -75,11 +89,12 @@ class index {
 				session_start();
 				$code = isset($_POST['code']) && trim($_POST['code']) ? strtolower(trim($_POST['code'])) : $this->_show_msg(L('please_enter_code'), HTTP_REFERER);
 				if ($code != $_SESSION['code']) {
-					$this->_show_msg(L('code_error'), HTTP_REFERER);
+					//$this->_show_msg(L('code_error'), HTTP_REFERER);
+                    alert::message(-1,L('code_error'));
 				}
 			}
 		}
-		
+
 		//通过API接口调用数据的标题、URL地址
 		if (!$data = get_comment_api($this->commentid)) {
 			$this->_show_msg(L('illegal_parameters'));
@@ -87,7 +102,7 @@ class index {
 			$title = $data['title'];
 			$url = $data['url'];
 			unset($data);
-		} 
+		}
 
 		if (strpos($url,APP_PATH) === 0) {
 			$domain = APP_PATH;
@@ -95,14 +110,15 @@ class index {
 			$urls = parse_url($url);
 			$domain = $urls['scheme'].'://'.$urls['host'].(isset($urls['port']) && !empty($urls['port']) ? ":".$urls['port'] : '').'/';
 		}
-		
-		$content = isset($_POST['content']) && trim($_POST['content']) ? trim($_POST['content']) : $this->_show_msg(L('please_enter_content'), HTTP_REFERER);
+
+		$content = isset($_POST['content']) && trim($_POST['content']) ? trim($_POST['content']) : alert::message(-1,L('please_enter_content'));
 		$direction = isset($_POST['direction']) && intval($_POST['direction']) ? intval($_POST['direction']) : '';
 		$data = array('userid'=>$userid, 'username'=>$username, 'content'=>$content, 'direction'=>$direction);
 		$comment->add($this->commentid, $this->siteid, $data, $id, $title, $url);
-		$this->_show_msg($comment->get_error()."<iframe width='0' id='top_src' height='0' src='$domain/js.html?200'></iframe>", (in_array($comment->msg_code, array(0,7)) ? HTTP_REFERER : ''), (in_array($comment->msg_code, array(0,7)) ? 1 : 0));
+		//$this->_show_msg($comment->get_error()."<iframe width='0' id='top_src' height='0' src='$domain/js.html?200'></iframe>", (in_array($comment->msg_code, array(0,7)) ? HTTP_REFERER : ''), (in_array($comment->msg_code, array(0,7)) ? 1 : 0));
+        alert::message(1,$comment->get_error());
 	}
-	
+
 	public function support() {
 		$id = isset($_GET['id']) && intval($_GET['id']) ? intval($_GET['id']) : $this->_show_msg(L('illegal_parameters'), HTTP_REFERER);
 		unset($_GET);
@@ -115,7 +131,7 @@ class index {
 		}
 		$this->_show_msg($comment->get_error(), ($comment->msg_code == 0 ? HTTP_REFERER : ''), ($comment->msg_code == 0 ? 1 : 0));
 	}
-	
+
 	public function ajax() {
 		$commentid =& $this->commentid;
 		$siteid =& $this->siteid;
@@ -136,15 +152,15 @@ class index {
 				case '1'://正
 					$total = $comment['square'];
 					break;
-					
+
 				case '2'://反
 					$total = $comment['anti'];
 					break;
-					
+
 				case '3'://中
 					$total = $comment['neutral'];
 					break;
-					
+
 				default:
 					$total = $comment['total'];
 					break;
@@ -158,23 +174,23 @@ class index {
 			exit('0');
 		}
 	}
-	
+
 	//提示信息处理
 	protected function _show_msg($msg, $url = '', $status = 0) {
-		
+
 		switch ($this->format) {
 			case 'json':
 				$msg = pc_base::load_config('system', 'charset') == 'gbk' ? iconv('gbk', 'utf-8', $msg) : $msg;
 				echo json_encode(array('msg'=>$msg, 'status'=>$status));
 				exit;
 			break;
-			
+
 			case 'jsonp':
 				$msg = pc_base::load_config('system', 'charset') == 'gbk' ? iconv('gbk', 'utf-8', $msg) : $msg;
 				echo strip_tags($this->callback).'('.json_encode(array('msg'=>$msg, 'status'=>$status)).')';
 				exit;
 			break;
-			
+
 			default:
 				showmessage($msg, $url);
 			break;

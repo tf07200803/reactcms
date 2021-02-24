@@ -4,6 +4,9 @@ import banner2 from './try2.png'
 import banner3 from './try3.png'
 import axios from "axios";
 import {useHistory} from 'react-router-dom';
+
+
+
 import $ from "jquery";
 import {Link} from "react-router-dom";
 
@@ -27,10 +30,11 @@ const Blog_detail=(props)=>{
 
     const mounted=useRef();
     const [jsondata,datachange]=useState(null);
+    const [message,messagechange]=useState(null);
     const [pageid,idchange]=useState(data.id)
     const [_pageid,_idchange]=useState(data.id)
     const history = useHistory();
-
+    const [content, setcontent] = useState('');
 
 
 
@@ -42,10 +46,25 @@ const Blog_detail=(props)=>{
 
     }
     const getapi=()=>{
+        props.loading(true)
         axios.get('index.php?m=content&c=index&a=show&catid=6&id='+pageid, {
         }).then(function (response) {
+            props.loading(false)
             var res=response.data;
             datachange(res.data)
+
+
+        }).catch(function (err) {
+            props.loading(false)
+            console.log(err);
+        });
+    }
+
+    const getmessage=()=>{
+        axios.get('index.php?m=comment&c=index&a=getmessage&commentid=content_'+data.catid+'-'+data.id+'-1', {
+        }).then(function (response) {
+            var res=response.data;
+            messagechange(res.data)
 
 
         }).catch(function (err) {
@@ -53,16 +72,39 @@ const Blog_detail=(props)=>{
             console.log(err);
         });
     }
-    const messagepost=()=>{
-        var self=this
-        var data = {"title":'',"url":"","content":""};
-        axios.post('index.php?m=comment&c=index&a=post&commentid=content_'+data.catid+'-'+data.id+'-1', data,{
-        }).then(function (response) {
-            console.log(response)
 
-        }).catch(function (err) {
-            console.log(err);
-        });
+    const messagepost=()=>{
+        props.loading(true)
+        var self=this
+        var bodyFormData = new FormData();
+        bodyFormData.set('title', '');
+        bodyFormData.set('url', '');
+        bodyFormData.set('content', content);
+        axios({
+            method: 'post',
+            url: 'index.php?m=comment&c=index&a=post&commentid=content_'+data.catid+'-'+data.id+'-1',
+            data: bodyFormData,
+            headers: {'Content-Type': 'multipart/form-data' }
+        })
+            .then(function (response) {
+                props.loading(false)
+                var res=response.data;
+                if(res.status==-1){
+                    alert(res.msg)
+                }else if(res.status==1){
+
+                    setcontent('');
+                    getmessage();
+                }
+
+            })
+            .catch(function (response) {
+                //handle error
+                props.loading(false)
+                console.log(response);
+            });
+
+
     }
     useEffect(()=>{
         var self=this;
@@ -70,16 +112,19 @@ const Blog_detail=(props)=>{
             mounted.current=true;
             console.log(pageid)
             getapi();
+            getmessage();
 
         }
         else{ //componentDidUpdate
             console.log('觸發內容更動function')
+            console.log(message)
             data=getUrlParam(window.location.href);
             idchange(data.id)
             if(pageid!=_pageid){
                 console.log("pageid有變動");
                 _idchange(data.id)
                 getapi();
+                getmessage();
             }
         }
 
@@ -117,19 +162,24 @@ const Blog_detail=(props)=>{
         </div>
 
 
-        <div className="col-12">
+        <div className="col-12 mt-4">
 
 
             <div>我要留言</div>
-            <div>
-        <textarea style={{width:"100%"}}>
-
-    </textarea>
-    <input type="submit" value="送出留言" onClick={() => messagepost()}/>
-            </div>
+            <div> <textarea style={{width:"100%"}} value={content} onChange={e => setcontent(e.target.value)}></textarea> <input type="submit" value="送出留言" onClick={() => messagepost()}/> </div>
 
 
         </div>
+
+
+
+    <div className="col-12 mb-4 mt-4">
+    {message===null ? "": Object.entries(message).map((t,k) => <div className="messagestyle" key={t[0]}><div>{t[0]} {t[1].username}：</div><div>{t[1].content}</div></div>)}
+
+
+        </div>
+
+
 
 
         </div>

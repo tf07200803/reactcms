@@ -1,9 +1,9 @@
 <?php
-
+pc_base::load_sys_class('alert');
 class foreground {
 	public $db, $memberinfo;
 	private $_member_modelinfo;
-	
+
 	public function __construct() {
 		self::check_ip();
 		$this->db = pc_base::load_model('member_model');
@@ -12,7 +12,7 @@ class foreground {
 			self::check_member();
 		}
 	}
-	
+
 	/**
 	 * 判断用户是否已经登陆
 	 */
@@ -42,13 +42,13 @@ class foreground {
 				if(is_array($this->memberinfo)) {
 					$this->memberinfo = array_merge($this->memberinfo, $this->_member_modelinfo);
 				}
-				
+
 				if($this->memberinfo && $this->memberinfo['password'] === $password) {
-					
+
 					if (!defined('SITEID')) {
 					   define('SITEID', $this->memberinfo['siteid']);
 					}
-					
+
 					if($this->memberinfo['groupid'] == 1) {
 						param::set_cookie('auth', '');
 						param::set_cookie('_userid', '');
@@ -59,12 +59,12 @@ class foreground {
 						param::set_cookie('auth', '');
 						param::set_cookie('_userid', '');
 						param::set_cookie('_groupid', '');
-						
+
 						//设置当前登录待验证账号COOKIE，为重发邮件所用
 						param::set_cookie('_regusername', $this->memberinfo['username']);
 						param::set_cookie('_reguserid', $this->memberinfo['userid']);
 						param::set_cookie('_reguseruid', $this->memberinfo['phpssouid']);
-						
+
 						param::set_cookie('email', $this->memberinfo['email']);
 						showmessage(L('need_emial_authentication', '', 'member'), 'index.php?m=member&c=index&a=register&t=2');
 					}
@@ -76,18 +76,19 @@ class foreground {
 				}
 				unset($userid, $password, $phpcms_auth, $auth_key);
 			} else {
+                alert::message(-1,'');
 				$forward= isset($_GET['forward']) ?  urlencode($_GET['forward']) : urlencode(get_url());
 				showmessage(L('please_login', '', 'member'), 'index.php?m=member&c=index&a=login&forward='.$forward);
 			}
 		}
 	}
 	/**
-	 * 
+	 *
 	 * IP禁止判断 ...
 	 */
 	final private function check_ip(){
 		$this->ipbanned = pc_base::load_model('ipbanned_model');
 		$this->ipbanned->check_ip();
  	}
-	
+
 }

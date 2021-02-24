@@ -41,6 +41,8 @@ const Blog_menu=(props)=>{
     const mounted=useRef();
     const testpath='index.php?m=link&c=index&a=menu'
     const logoutpath='index.php?m=member&c=index&a=logout&webtype=vue'
+
+
     const [jsondata,datachange]=useState(null);
 
     const classes = useStyles();
@@ -85,6 +87,7 @@ const Blog_menu=(props)=>{
         history.push("/Blog_reg");
     }
 
+
     useEffect(()=>{
         if(!mounted.current){ //componentDidMount
             mounted.current=true;
@@ -98,6 +101,7 @@ const Blog_menu=(props)=>{
 
                 console.log(err);
             });
+
 
         }
         else{ //componentDidUpdate
@@ -136,7 +140,7 @@ const Blog_menu=(props)=>{
 
         <div className="loginheader">
             <div className="container pt-3 pb-3">
-                <div className="loginbtn row justify-content-end"><div onClick={() => login()}>登入</div><div onClick={() => reg()}>/註冊</div><div onClick={() => loginout()}>登出</div></div>
+                <div className="loginbtn row justify-content-end"><div onClick={() => login()} className={props.logindata ? 'd-none':''}>登入</div><div onClick={() => reg()} className={props.logindata ? 'd-none':''}>/註冊</div><div className={props.logindata ? '':'d-none'}>{props.logindata ? props.logindata.nickname:''}您好/</div><div onClick={() => loginout()} className={props.logindata ? '':'d-none'}>登出</div></div>
 
             </div>
 
