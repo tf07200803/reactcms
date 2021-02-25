@@ -99,7 +99,8 @@ const Blog_detail=(props)=>{
                 }else if(res.status==1){
 
                     setcontent('');
-                    getmessage();
+                    pagelink(data.id,data.catid)
+                    //getmessage();
                 }
 
             })
@@ -181,7 +182,7 @@ const Blog_detail=(props)=>{
 
 
     <div className="col-12 mb-4 mt-4">
-    {message===null ? "": Object.entries(message.data).map((t,k) => <div className="messagestyle" key={t[0]}><div>{t[1].username}：</div><div>{t[1].content}</div></div>)}
+    {message===null || message==false ? "": Object.entries(message.data).map((t,k) => <div className="messagestyle" key={t[0]}><div>{t[1].username}：</div><div>{t[1].content}</div></div>)}
 
     <div className="pages" dangerouslySetInnerHTML={message===null ? createMarkup(''): createMarkup(message.pages)}></div>
         </div>
