@@ -31,8 +31,10 @@ const Blog_detail=(props)=>{
     const mounted=useRef();
     const [jsondata,datachange]=useState(null);
     const [message,messagechange]=useState(null);
-    const [pageid,idchange]=useState(data.id)
-    const [_pageid,_idchange]=useState(data.id)
+    const [newsid,idchange]=useState(data.id)
+    const [_newsid,_idchange]=useState(data.id)
+    const [pageid,pagechange]=useState(data.page)
+    const [_pageid,_pagechange]=useState(data.page)
     const history = useHistory();
     const [content, setcontent] = useState('');
 
@@ -47,7 +49,7 @@ const Blog_detail=(props)=>{
     }
     const getapi=()=>{
         props.loading(true)
-        axios.get('index.php?m=content&c=index&a=show&catid=6&id='+pageid, {
+        axios.get('index.php?m=content&c=index&a=show&catid=6&id='+newsid, {
         }).then(function (response) {
             props.loading(false)
             var res=response.data;
@@ -61,16 +63,19 @@ const Blog_detail=(props)=>{
     }
 
     const getmessage=()=>{
-        axios.get('index.php?m=comment&c=index&a=getmessage&commentid=content_'+data.catid+'-'+data.id+'-1', {
-        }).then(function (response) {
-            var res=response.data;
-            messagechange(res.data)
 
-
-        }).catch(function (err) {
-
-            console.log(err);
-        });
+        axios({
+            method: 'get',
+            url: 'index.php?m=comment&c=index&a=getmessage&commentid=content_'+data.catid+'-'+data.id+'-1',
+            params: {'catid': data.catid,'id':data.id,'pageid':data.page}
+        })
+            .then(function (response) {
+                var res=response.data;
+                messagechange(res.data)
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
     }
 
     const messagepost=()=>{
@@ -110,25 +115,27 @@ const Blog_detail=(props)=>{
         var self=this;
         if(!mounted.current){ //componentDidMount
             mounted.current=true;
-            console.log(pageid)
             getapi();
             getmessage();
 
         }
         else{ //componentDidUpdate
             console.log('觸發內容更動function')
-            console.log(message)
+            //console.log(message)
             data=getUrlParam(window.location.href);
             idchange(data.id)
-            if(pageid!=_pageid){
-                console.log("pageid有變動");
+            pagechange(data.page)
+            if(newsid!=_newsid || pageid!=_pageid){
+                console.log("id有變動");
                 _idchange(data.id)
+                _pagechange(data.page)
+                console.log(data)
                 getapi();
                 getmessage();
             }
         }
 
-    },[props,jsondata,pageid]);
+    },[props,jsondata,newsid,pageid]);
 
 
 
@@ -174,9 +181,9 @@ const Blog_detail=(props)=>{
 
 
     <div className="col-12 mb-4 mt-4">
-    {message===null ? "": Object.entries(message).map((t,k) => <div className="messagestyle" key={t[0]}><div>{t[0]} {t[1].username}：</div><div>{t[1].content}</div></div>)}
+    {message===null ? "": Object.entries(message.data).map((t,k) => <div className="messagestyle" key={t[0]}><div>{t[1].username}：</div><div>{t[1].content}</div></div>)}
 
-
+    <div className="pages" dangerouslySetInnerHTML={message===null ? createMarkup(''): createMarkup(message.pages)}></div>
         </div>
 
 

@@ -2,16 +2,16 @@
 class comment_tag {
 	//数据库连接
 	private $comment_db, $comment_setting_db, $comment_data_db, $comment_table_db;
-	
+
 	public function __construct() {
 		$this->comment_db = pc_base::load_model('comment_model');
 		$this->comment_setting_db = pc_base::load_model('comment_setting_model');
 		$this->comment_data_db = pc_base::load_model('comment_data_model');
 		$this->comment_table_db = pc_base::load_model('comment_table_model');
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * PC标签数据数量计算函数
 	 * @param array $data PC标签中的配置参数传入
 	 */
@@ -42,9 +42,9 @@ class comment_tag {
 				return $comment['total'];
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 获取评论总表信息
 	 * @param array $data PC标签中的配置参数传入
 	 */
@@ -53,9 +53,9 @@ class comment_tag {
 		if (empty($commentid)) return false;
 		return $this->comment_db->get_one(array('commentid'=>$commentid));
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 获取评论数据
 	 * @param array $data PC标签中的配置参数传入
 	 */
@@ -71,18 +71,18 @@ class comment_tag {
 		if (!$comment) return false;
 		//设置存储数据表
 		$this->comment_data_db->table_name($comment['tableid']);
-				
+
 		$hot = 'id';
 		if (isset($data['hot']) && !empty($data['hot'])) {
 			$hot = 'support desc, id';
 		}
-		
+
 		//是否按评论方向获取
 		$direction = isset($data['direction']) && intval($data['direction']) ? intval($data['direction']) : 0;
 		if (!in_array($direction, array(0,1,2,3))) {
 			$direction = 0;
 		}
-		
+
 		switch ($direction) {
 			case 1://正方
 				$sql = array('commentid'=>$commentid, 'direction'=>1, 'status'=>1);
@@ -98,9 +98,54 @@ class comment_tag {
 		}
 		return $this->comment_data_db->select($sql, '*', $data['limit'], $hot.' desc ');
 	}
-	
+
+    public function lists_r($data) {
+        $commentid = $data['commentid'];
+        if (empty($commentid)) return false;
+        $siteid = $data['siteid'];
+        if (empty($siteid)) {
+            pc_base::load_app_func('global', 'comment');
+            list($module,$contentid, $siteid) = decode_commentid($commentid);
+        }
+        $comment = $this->comment_db->get_one(array('commentid'=>$commentid, 'siteid'=>$siteid));
+        if (!$comment) return false;
+        //设置存储数据表
+        $this->comment_data_db->table_name($comment['tableid']);
+
+        $hot = 'id';
+        if (isset($data['hot']) && !empty($data['hot'])) {
+            $hot = 'support desc, id';
+        }
+
+        //是否按评论方向获取
+        $direction = isset($data['direction']) && intval($data['direction']) ? intval($data['direction']) : 0;
+        if (!in_array($direction, array(0,1,2,3))) {
+            $direction = 0;
+        }
+
+        switch ($direction) {
+            case 1://正方
+                $sql = array('commentid'=>$commentid, 'direction'=>1, 'status'=>1);
+                break;
+            case 2://反方
+                $sql = array('commentid'=>$commentid, 'direction'=>2, 'status'=>1);
+                break;
+            case 3://中立方
+                $sql = array('commentid'=>$commentid, 'direction'=>3, 'status'=>1);
+                break;
+            default://获取所有
+                $sql = array('commentid'=>$commentid, 'status'=>1);
+        }
+
+        //$result['data'] = $this->comment_data_db->select($sql, '*', $data['limit'], $hot.' desc ');
+        $result['data'] = $this->comment_data_db->listinfo($sql,'id desc',$_GET['pageid'],$data['limit']);
+        $result['pages']=$this->comment_data_db->pages;
+
+        return $result;
+    }
+
 	/**
-	 * 
+	 *
 	 * 评论排行榜
 	 * @param array $data PC标签中的配置参数传入
 	 */
@@ -108,7 +153,7 @@ class comment_tag {
 		$data['limit'] = intval($data['limit']);
 		if (!isset($data['limit']) || empty($data['limit'])) {
 			$data['limit'] = 10;
-		} 
+		}
 		$sql =  array();
 		$data['siteid'] = intval($data['siteid']);
 		if (isset($data['siteid']) && !empty($data['siteid'])) {
@@ -116,9 +161,9 @@ class comment_tag {
 		}
 		return $this->comment_db->select($sql, "*", $data['limit'], "total desc");
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * PC标签，可视化显示参数配置。
 	 */
 	public function pc_tag() {

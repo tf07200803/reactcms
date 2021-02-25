@@ -27,7 +27,7 @@ const Blog_detail=(props)=>{
         axios({
             method: 'get',
             url: 'index.php?m=content&c=index&a=getallnewsp3',
-            params: {'catid': catid,'page': pageid}
+            params: {'catid': catid,'page': pageid,'type':'news'}
         })
             .then(function (response) {
                 var res=response.data;

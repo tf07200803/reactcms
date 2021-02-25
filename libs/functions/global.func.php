@@ -719,7 +719,16 @@ function pages($num, $curr_page, $perpage = 20, $urlrule = '', $array = array(),
 		$urlrule = URLRULE;
 		$array = $GLOBALS['URL_ARRAY'];
 	} elseif($urlrule == '') {
-		$urlrule = url_par('page={$page}');
+
+        if($_GET['type']=='news'){
+            $catid = intval($_GET['catid']);
+            $url = '#/Blog_list?id='.$catid;
+		}else{
+            $url = '#/Blog_detail?id='.$_GET['id'].'&catid='.$_GET['catid'];
+		}
+
+		$urlrule = url_par('page={$page}',$url);
+
 	}
 	$multipage = '';
 	if($num > $perpage) {
@@ -807,9 +816,7 @@ function pageurl($urlrule, $page, $array = array()) {
  * @return URL
  */
 function url_par($par, $url = '') {
-	//if($url == '') $url = get_url();
-    $catid = intval($_GET['catid']);
-    if($url == '') $url = '#/Blog_list?id='.$catid;
+	if($url == '') $url = get_url();
 	$pos = strpos($url, '?');
 	if($pos === false) {
 		$url .= '?'.$par;
