@@ -99,8 +99,13 @@ const Blog_detail=(props)=>{
                 }else if(res.status==1){
 
                     setcontent('');
-                    pagelink(data.id,data.catid)
-                    //getmessage();
+                    if(data.page){
+                        pagelink(data.id,data.catid)
+                    }else{
+                        getmessage();
+
+                    }
+                    
                 }
 
             })

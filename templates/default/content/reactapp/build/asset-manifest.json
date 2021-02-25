@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "./phpcms/templates/default/content/reactapp/build/static/css/main.5b9d241d.chunk.css",
-    "main.js": "./phpcms/templates/default/content/reactapp/build/static/js/main.0d566b1a.chunk.js",
-    "main.css.map": "./phpcms/templates/default/content/reactapp/build/static/css/main.5b9d241d.chunk.css.map",
-    "main.js.map": "./phpcms/templates/default/content/reactapp/build/static/js/main.0d566b1a.chunk.js.map",
-    "runtime-main.js": "./phpcms/templates/default/content/reactapp/build/static/js/runtime-main.4bfbd751.js",
-    "runtime-main.js.map": "./phpcms/templates/default/content/reactapp/build/static/js/runtime-main.4bfbd751.js.map",
+    "main.css": "./phpcms/templates/default/content/reactapp/build/static/css/main.d73c9369.chunk.css",
+    "main.js": "./phpcms/templates/default/content/reactapp/build/static/js/main.3260ff37.chunk.js",
+    "main.css.map": "./phpcms/templates/default/content/reactapp/build/static/css/main.d73c9369.chunk.css.map",
+    "main.js.map": "./phpcms/templates/default/content/reactapp/build/static/js/main.3260ff37.chunk.js.map",
+    "runtime-main.js": "./phpcms/templates/default/content/reactapp/build/static/js/runtime-main.0623fefa.js",
+    "runtime-main.js.map": "./phpcms/templates/default/content/reactapp/build/static/js/runtime-main.0623fefa.js.map",
     "static/css/2.43b2b750.chunk.css": "./phpcms/templates/default/content/reactapp/build/static/css/2.43b2b750.chunk.css",
-    "static/js/2.9dd0cda5.chunk.js": "./phpcms/templates/default/content/reactapp/build/static/js/2.9dd0cda5.chunk.js",
+    "static/js/2.ed9e7ca2.chunk.js": "./phpcms/templates/default/content/reactapp/build/static/js/2.ed9e7ca2.chunk.js",
     "static/css/2.43b2b750.chunk.css.map": "./phpcms/templates/default/content/reactapp/build/static/css/2.43b2b750.chunk.css.map",
-    "static/js/2.9dd0cda5.chunk.js.map": "./phpcms/templates/default/content/reactapp/build/static/js/2.9dd0cda5.chunk.js.map",
-    "static/js/3.d83b7b38.chunk.js": "./phpcms/templates/default/content/reactapp/build/static/js/3.d83b7b38.chunk.js",
-    "static/js/3.d83b7b38.chunk.js.map": "./phpcms/templates/default/content/reactapp/build/static/js/3.d83b7b38.chunk.js.map",
+    "static/js/2.ed9e7ca2.chunk.js.map": "./phpcms/templates/default/content/reactapp/build/static/js/2.ed9e7ca2.chunk.js.map",
+    "static/js/3.5151ec1c.chunk.js": "./phpcms/templates/default/content/reactapp/build/static/js/3.5151ec1c.chunk.js",
+    "static/js/3.5151ec1c.chunk.js.map": "./phpcms/templates/default/content/reactapp/build/static/js/3.5151ec1c.chunk.js.map",
     "../../index.html": "./phpcms/templates/default/content/reactapp/build/../../index.html",
     "static/media/empty.bac9d7f0.jpg": "./phpcms/templates/default/content/reactapp/build/static/media/empty.bac9d7f0.jpg",
     "static/media/try.e026cca0.png": "./phpcms/templates/default/content/reactapp/build/static/media/try.e026cca0.png",
@@ -19,10 +19,10 @@
     "static/media/try3.b04b1a0f.png": "./phpcms/templates/default/content/reactapp/build/static/media/try3.b04b1a0f.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.4bfbd751.js",
+    "static/js/runtime-main.0623fefa.js",
     "static/css/2.43b2b750.chunk.css",
-    "static/js/2.9dd0cda5.chunk.js",
-    "static/css/main.5b9d241d.chunk.css",
-    "static/js/main.0d566b1a.chunk.js"
+    "static/js/2.ed9e7ca2.chunk.js",
+    "static/css/main.d73c9369.chunk.css",
+    "static/js/main.3260ff37.chunk.js"
   ]
 }
