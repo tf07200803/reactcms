@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "./phpcms/templates/default/content/reactapp/build/static/css/main.d73c9369.chunk.css",
+    "main.css": "./phpcms/templates/default/content/reactapp/build/static/css/main.85350967.chunk.css",
     "main.js": "./phpcms/templates/default/content/reactapp/build/static/js/main.3260ff37.chunk.js",
-    "main.css.map": "./phpcms/templates/default/content/reactapp/build/static/css/main.d73c9369.chunk.css.map",
+    "main.css.map": "./phpcms/templates/default/content/reactapp/build/static/css/main.85350967.chunk.css.map",
     "main.js.map": "./phpcms/templates/default/content/reactapp/build/static/js/main.3260ff37.chunk.js.map",
     "runtime-main.js": "./phpcms/templates/default/content/reactapp/build/static/js/runtime-main.0623fefa.js",
     "runtime-main.js.map": "./phpcms/templates/default/content/reactapp/build/static/js/runtime-main.0623fefa.js.map",
@@ -22,7 +22,7 @@
     "static/js/runtime-main.0623fefa.js",
     "static/css/2.43b2b750.chunk.css",
     "static/js/2.ed9e7ca2.chunk.js",
-    "static/css/main.d73c9369.chunk.css",
+    "static/css/main.85350967.chunk.css",
     "static/js/main.3260ff37.chunk.js"
   ]
 }
